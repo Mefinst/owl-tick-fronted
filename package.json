@@ -1,0 +1,25 @@
+{
+  "name": "owl-tick-fronted",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "test": "jest"
+  },
+  "author": "mefinst",
+  "license": "",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/test-utils": "^2.0.0",
+    "cypress": "^10.1.0",
+    "happy-dom": "^5.3.1",
+    "jsdom": "^19.0.0",
+    "prettier": "^2.7.1",
+    "vite": "^2.9.12",
+    "vitest": "^0.15.1"
+  },
+  "dependencies": {
+    "vue": "^3.2.37"
+  }
+}
