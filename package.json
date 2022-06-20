@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "test": "cypress run"
+    "test": "vitest run"
   },
   "author": "mefinst",
   "license": "",
