@@ -1,7 +1,7 @@
 <style></style>
 
 <template>
-	<div class="login-form">
+	<form class="login-form">
 		<label class="input-field">
 			<span>Username</span>
 			<input type="text" name="username" />
@@ -11,7 +11,7 @@
 			<span>Pasword</span>
 			<input type="password" name="password" />
 		</label>
-	</div>
+	</form>
 </template>
 
 <script setup lang="ts"></script>
