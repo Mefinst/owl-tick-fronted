@@ -13,7 +13,7 @@ describe('Login form', () => {
 	test('should render username input', () => {
 		expect(getUsernameInput().exists())
 	})
-	test('should render username input', () => {
+	test('should render password input', () => {
 		expect(getPasswordInput().exists())
 	})
 })
