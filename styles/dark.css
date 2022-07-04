@@ -1,0 +1,6 @@
+:root {
+    --global-background: hwb(200 5% 85%);
+    --surface-background: hwb(200 5% 80%);
+    --surface-border: aliceblue;
+    --global-text-color: aliceblue;
+}

@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
-import TickCounter from './components/tick-counter.vue'
+import TickApp from './tick-app.vue'
+import { router } from './routes/router'
 
-const tickCounter = createApp(TickCounter)
-
-tickCounter.mount('[data-component="tick-counter"]')
+const tickCounter = createApp(TickApp)
+tickCounter.use(router)
+tickCounter.mount('#app')

@@ -1,0 +1,6 @@
+:root {
+    --global-background: hwb(200 70% 10%);
+    --surface-background: hwb(200 80% 5%);
+    --surface-border: black;
+    --global-text-color: black;
+}
