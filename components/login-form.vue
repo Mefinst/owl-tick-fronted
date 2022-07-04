@@ -8,7 +8,7 @@
 		</label>
 
 		<label class="input-field">
-			<span>Pasword</span>
+			<span>Password</span>
 			<input type="password" name="password" />
 		</label>
 	</form>
