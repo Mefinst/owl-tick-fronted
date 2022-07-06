@@ -10,9 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, toRef, watchEffect } from 'vue'
-import { option } from 'fp-ts'
-import { fold, map, none } from 'fp-ts/Option'
+import { computed, ref, watchEffect } from 'vue'
+import { fold, fromNullable, map } from 'fp-ts/Option'
 import { pipe } from 'fp-ts/function'
 
 const props = defineProps({ initialValue: { type: Number } })
@@ -20,10 +19,8 @@ const props = defineProps({ initialValue: { type: Number } })
 const tickCount = ref(0)
 const increment = () => (tickCount.value += 1)
 
-const initialValue = toRef(props, 'initialValue')
-const initialValueWrapped = computed(() =>
-	initialValue.value == null ? none : option.of(initialValue.value)
-)
+const initialValue = ref(localStorage.getItem('ticks'))
+const initialValueWrapped = computed(() => fromNullable(initialValue.value))
 watchEffect(() => {
 	tickCount.value = pipe(
 		initialValueWrapped.value,
@@ -34,4 +31,6 @@ watchEffect(() => {
 		)
 	)
 })
+
+watchEffect(() => localStorage.setItem('ticks', String(tickCount.value)))
 </script>
