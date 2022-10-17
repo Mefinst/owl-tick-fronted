@@ -6,7 +6,7 @@
 
 job("Unit tests") {
     container(displayName = "Unit tests", image = "node:lts") {
-    	shellScript(interpreter = "/bin/sh"
+    	shellScript(interpreter = "/bin/sh",
             content = """
                 npm ci
                 npm run test
