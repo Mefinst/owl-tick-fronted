@@ -29,7 +29,7 @@ job("Docker image") {
         
         // get auth data from secrets and put it to env vars
         env["DOCKER_USER"] = "token"
-        env["DOCKER_TOKEN"] = Secrets("DOCKER_REGISTRY_TOKEN")
+        env["DOCKER_TOKEN"] = Secrets("docker_registry_token")
 
         // put auth data to Docker config
         beforeBuildScript {
