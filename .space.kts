@@ -18,7 +18,7 @@ job("Unit tests") {
         shellScript(displayName = "Run tests") {
             interpreter = "/bin/sh"
             content = """
-                npm run tests
+                npm run test
             """
         }
     }
