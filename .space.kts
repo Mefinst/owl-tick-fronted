@@ -7,11 +7,25 @@
 job("Unit tests") {
     container(displayName = "Unit tests", image = "node:lts") {
     	shellScript {
+            name = "Retrieve dependencies"
             interpreter = "/bin/sh"
             content = """
                 npm ci
-                npm run test
             """
+        }
+        shellScript {
+            name = "Run tests"
+            interpreter = "/bin/sh"
+            content = """
+                npm run tests
+            """
+        }
+    }
+}
+
+job("Docker image") {
+    docker {
+        build {
         }
     }
 }
