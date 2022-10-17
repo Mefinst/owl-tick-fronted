@@ -7,14 +7,14 @@
 job("Unit tests") {
     container(displayName = "Unit tests", image = "node:lts") {
     	shellScript {
-            name = "Retrieve dependencies"
+            displayName = "Retrieve dependencies"
             interpreter = "/bin/sh"
             content = """
                 npm ci
             """
         }
         shellScript {
-            name = "Run tests"
+            displayName = "Run tests"
             interpreter = "/bin/sh"
             content = """
                 npm run tests
