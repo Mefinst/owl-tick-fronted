@@ -5,7 +5,7 @@
 */
 
 job("Unit tests") {
-    container(displayName = "Unit tests", image = "node:lts") {
+    container(displayName = "Get dependencies", image = "node:lts") {
     	shellScript(displayName = "Retrieve dependencies") {
             
             interpreter = "/bin/sh"
@@ -13,6 +13,8 @@ job("Unit tests") {
                 npm ci
             """
         }
+    }
+    container(displayName = "Unit tests", image = "node:lts") {
         shellScript(displayName = "Run tests") {
             interpreter = "/bin/sh"
             content = """
