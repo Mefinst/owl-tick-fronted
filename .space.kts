@@ -39,7 +39,7 @@ job("Frontend build") {
         build {
         }
         
-        push(Parameter("frontend_docker_image_name")) {
+        push(Params("frontend_docker_image_name")) {
         	tags("space-test")
         }
     }
