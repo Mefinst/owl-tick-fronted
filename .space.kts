@@ -18,10 +18,6 @@ job("Frontend build") {
         }
     }
     
-    // get auth data from secrets and put it to env vars
-    env["DOCKER_USER"] = Secrets("docker_registry_user")
-    env["DOCKER_TOKEN"] = Secrets("docker_registry_token")
-    env["DOCKER_IMAGE_NAME"] = Params("frontend_docker_image_name")
     val imageName = Params("frontend_docker_image_name").toString()
     docker(displayName = "Build docker image") {
         resources {
@@ -30,6 +26,10 @@ job("Frontend build") {
         }    
         
 
+        // get auth data from secrets and put it to env vars
+        env["DOCKER_USER"] = Secrets("docker_registry_user")
+        env["DOCKER_TOKEN"] = Secrets("docker_registry_token")
+        env["DOCKER_IMAGE_NAME"] = Params("frontend_docker_image_name")
         // put auth data to Docker config
         beforeBuildScript {
             content = """
