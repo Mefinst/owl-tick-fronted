@@ -39,8 +39,8 @@ job("Frontend build") {
         
         build {
         }
-        val imageName = Params("frontend_docker_image_name")
-        push(imageName) {
+        val imageName = System.getenv("DOCKER_IMAGE_NAME")
+        push(iamgeName) {
         	tags("space-test")
         }
     }
