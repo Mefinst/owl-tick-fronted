@@ -4,7 +4,7 @@
 * For more info, see https://www.jetbrains.com/help/space/automation.html
 */
 
-job("Unit tests") {    
+job("Frontend build") {    
     container(displayName = "Unit tests", image = "node:lts") {
         resources {
             cpu = 1.cpu
@@ -17,18 +17,15 @@ job("Unit tests") {
             """
         }
     }
-}
-
-job("Docker image") {
-  
-    docker {
+    
+    docker(displayName = "Build docker image") {
         resources {
             cpu = 1.cpu
             memory = 1000.mb
         }    
         
         // get auth data from secrets and put it to env vars
-        env["DOCKER_USER"] = "token"
+        env["DOCKER_USER"] = Secrets("docker_registry_user")
         env["DOCKER_TOKEN"] = Secrets("docker_registry_token")
 
         // put auth data to Docker config
@@ -42,7 +39,7 @@ job("Docker image") {
         build {
         }
         
-        push("cr.selcloud.ru/mefinst/owl-tick-frontend") {
+        push(Parameter("frontend_docker_image_name")) {
         	tags("space-test")
         }
     }
