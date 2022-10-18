@@ -40,7 +40,7 @@ job("Frontend build") {
         build {
         }
         val imageName = System.getenv("DOCKER_IMAGE_NAME")
-        push(iamgeName) {
+        push(imageName) {
         	tags("space-test")
         }
     }
