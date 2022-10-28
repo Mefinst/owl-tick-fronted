@@ -18,7 +18,6 @@ job("Frontend build") {
         }
     }
     
-    val imageName = Params("frontend_docker_image_name").toString()
     docker(displayName = "Build docker image") {
         resources {
             cpu = 1.cpu
@@ -40,7 +39,7 @@ job("Frontend build") {
         
         build {
         }
-        push(imageName) {
+        push {
         	tags {
             	"${"$"}DOCKER_IMAGE_NAME:space-test"
             }
