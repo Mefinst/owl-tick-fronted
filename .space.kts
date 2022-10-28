@@ -18,7 +18,7 @@ job("Frontend build") {
         }
     }
     
-    docker(displayName = "Build docker image") {
+    host(displayName = "Build docker image") {
         resources {
             cpu = 1.cpu
             memory = 1000.mb
@@ -37,11 +37,9 @@ job("Frontend build") {
                 """
         }
         
-        build {
-        }
-        push {
+        dockerBuildPush  {
         	tags {
-            	"${"$"}DOCKER_IMAGE_NAME:space-test"
+            	+"${"$"}DOCKER_IMAGE_NAME:space-test"
             }
         }
     }
