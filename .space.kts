@@ -19,10 +19,6 @@ job("Frontend build") {
     }
     
     host(displayName = "Build docker image") {
-        resources {
-            cpu = 1.cpu
-            memory = 1000.mb
-        }    
         
 
         // get auth data from secrets and put it to env vars
