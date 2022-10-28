@@ -41,7 +41,9 @@ job("Frontend build") {
         build {
         }
         push(imageName) {
-        	tags("space-test")
+        	tags {
+            	"${"$"}DOCKER_IMAGE_NAME:space-test"
+            }
         }
     }
 }
