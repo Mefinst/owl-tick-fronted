@@ -26,7 +26,7 @@ job("Frontend build") {
         env["DOCKER_TOKEN"] = Secrets("docker_registry_token")
         env["DOCKER_IMAGE_NAME"] = Params("frontend_docker_image_name")
         // put auth data to Docker config
-        beforeBuildScript {
+        shellScript {
             content = """
                     B64_AUTH=${'$'}(echo -n ${'$'}DOCKER_USER:${'$'}DOCKER_TOKEN | base64 -w 0)
                     echo "{\"auths\":{\"https://cr.selcloud.ru/v1/\":{\"auth\":\"${'$'}B64_AUTH\"}}}" > ${'$'}DOCKER_CONFIG/config.json
