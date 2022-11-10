@@ -40,7 +40,7 @@ job("Frontend build") {
         
         dockerBuildPush   {
             tags {
-                +"${"$"}DOCKER_IMAGE_NAME:space-${"$"}GIT_BRANCH"
+                +"${"$"}DOCKER_IMAGE_NAME:space-${"$"}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)"
             }
         }
     }
