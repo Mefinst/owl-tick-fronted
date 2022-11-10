@@ -26,16 +26,20 @@ job("Frontend build") {
         env["DOCKER_TOKEN"] = Secrets("docker_registry_token")
         env["DOCKER_IMAGE_NAME"] = Params("frontend_docker_image_name")
         // put auth data to Docker config
-        shellScript {
+        shellScript(displayName = "Config Docker auth") {
             content = """
                     B64_AUTH=${'$'}(echo -n ${'$'}DOCKER_USER:${'$'}DOCKER_TOKEN | base64 -w 0)
                     echo "{\"auths\":{\"https://cr.selcloud.ru/v1/\":{\"auth\":\"${'$'}B64_AUTH\"}}}" > ${'$'}DOCKER_CONFIG/config.json
                 """
         }
         
+        shellScript(displayName = "Read current branch name") {
+            content = """export GIT_BRANCH=$(git branch --show-current)"""
+        }
+        
         dockerBuildPush  {
         	tags {
-            	+"${"$"}DOCKER_IMAGE_NAME:space-test"
+            	+"${"$"}DOCKER_IMAGE_NAME:space-${"$"}GIT_BRANCH"
             }
         }
     }
