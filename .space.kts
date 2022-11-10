@@ -4,7 +4,6 @@
 * For more info, see https://www.jetbrains.com/help/space/automation.html
 */
 
-val branchName = api.gitBranch().split("/").last();
 job("Frontend build") {    
     container(displayName = "Unit tests", image = "node:lts") {
         resources {
@@ -26,7 +25,6 @@ job("Frontend build") {
         env["DOCKER_USER"] = Secrets("docker_registry_user")
         env["DOCKER_TOKEN"] = Secrets("docker_registry_token")
         env["DOCKER_IMAGE_NAME"] = Params("frontend_docker_image_name")
-        env["GIT_BRANCH"] = branchName
         // put auth data to Docker config
         shellScript(displayName = "Config Docker auth") {
             content = """
@@ -34,6 +32,12 @@ job("Frontend build") {
                     echo "{\"auths\":{\"https://cr.selcloud.ru/v1/\":{\"auth\":\"${'$'}B64_AUTH\"}}}" > ${'$'}DOCKER_CONFIG/config.json
                 """
         }
+        
+        kotlinScript { api ->   
+            val branchName = api.gitBranch().split("/").last()  
+            env["GIT_BRANCH"] = branchName
+        }
+        
         dockerBuildPush   {
             tags {
                 +"${"$"}DOCKER_IMAGE_NAME:space-${"$"}GIT_BRANCH"
