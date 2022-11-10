@@ -25,7 +25,6 @@ job("Frontend build") {
         env["DOCKER_USER"] = Secrets("docker_registry_user")
         env["DOCKER_TOKEN"] = Secrets("docker_registry_token")
         env["DOCKER_IMAGE_NAME"] = Params("frontend_docker_image_name")
-        env["GIT_BRANCH"] = gitBranch().split("/").last()
         // put auth data to Docker config
         shellScript(displayName = "Config Docker auth") {
             content = """
@@ -35,6 +34,14 @@ job("Frontend build") {
         }
         
         dockerBuildPush  {
+            beforeBuildScript {
+                // Create an env variable BRANCH,
+                // use env var to get full branch name,
+                // leave only the branch name without the 'refs/heads/' path
+                content = """
+                    export BRANCH=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)
+                """
+            }
         	tags {
             	+"${"$"}DOCKER_IMAGE_NAME:space-${"$"}GIT_BRANCH"
             }
