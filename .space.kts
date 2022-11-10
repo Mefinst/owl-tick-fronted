@@ -25,7 +25,7 @@ job("Frontend build") {
         env["DOCKER_USER"] = Secrets("docker_registry_user")
         env["DOCKER_TOKEN"] = Secrets("docker_registry_token")
         env["DOCKER_IMAGE_NAME"] = Params("frontend_docker_image_name")
-        env["GIT_BRANCH"] = gitBranch().split("/").last()
+        env["GIT_BRANCH"] = gitBranch().split("/").last() 
         // put auth data to Docker config
         shellScript(displayName = "Config Docker auth") {
             content = """
