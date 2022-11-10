@@ -32,22 +32,17 @@ job("Frontend build") {
                     echo "{\"auths\":{\"https://cr.selcloud.ru/v1/\":{\"auth\":\"${'$'}B64_AUTH\"}}}" > ${'$'}DOCKER_CONFIG/config.json
                 """
         }
-        
-        docker   {
-            beforeBuildScript {
-                // Create an env variable BRANCH,
-                // use env var to get full branch name,
-                // leave only the branch name without the 'refs/heads/' path
-                content = """
-                    export BRANCH=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)
-                """
-            }
-            build {
-            }
-            push {
-                tags {
-                    +"${"$"}DOCKER_IMAGE_NAME:space-${"$"}GIT_BRANCH"
-                }
+        shellScript {
+            // Create an env variable BRANCH,
+            // use env var to get full branch name,
+            // leave only the branch name without the 'refs/heads/' path
+            content = """
+                export GIT_BRANCH=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)
+            """
+        }
+        dockerBuildPush   {
+            tags {
+                +"${"$"}DOCKER_IMAGE_NAME:space-${"$"}GIT_BRANCH"
             }
         }
     }
