@@ -33,7 +33,7 @@ job("Frontend build") {
                 """
         }
         
-        dockerBuildPush  {
+        docker   {
             beforeBuildScript {
                 // Create an env variable BRANCH,
                 // use env var to get full branch name,
@@ -42,8 +42,12 @@ job("Frontend build") {
                     export BRANCH=${'$'}(echo ${'$'}JB_SPACE_GIT_BRANCH | cut -d'/' -f 3)
                 """
             }
-        	tags {
-            	+"${"$"}DOCKER_IMAGE_NAME:space-${"$"}GIT_BRANCH"
+            build {
+            }
+            push {
+                tags {
+                    +"${"$"}DOCKER_IMAGE_NAME:space-${"$"}GIT_BRANCH"
+                }
             }
         }
     }
