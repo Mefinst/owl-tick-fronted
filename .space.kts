@@ -33,13 +33,9 @@ job("Frontend build") {
                 """
         }
         
-        shellScript(displayName = "Read current branch name") {
-            content = """export GIT_BRANCH=$(git branch --show-current)"""
-        }
-        
         dockerBuildPush  {
         	tags {
-            	+"${"$"}DOCKER_IMAGE_NAME:space-${"$"}GIT_BRANCH"
+            	+"${"$"}DOCKER_IMAGE_NAME:space-${"$"}JB_SPACE_GIT_BRANCH"
             }
         }
     }
